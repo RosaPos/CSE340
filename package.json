@@ -1,0 +1,27 @@
+{
+  "name": "cse340",
+  "version": "1.0.0",
+  "description": "This course focuses on creating dynamic web sites using server-side languages, making use of databases and design patterns. The concepts introduced in Web Frontend Development courses are expected to be continued and implemented.",
+  "homepage": "https://github.com/RosaPos/CSE340#readme",
+  "bugs": {
+    "url": "https://github.com/RosaPos/CSE340/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RosaPos/CSE340.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
