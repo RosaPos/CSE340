@@ -57,7 +57,7 @@ CREATE TABLE project_category (
     PRIMARY KEY (project_id, category_id)
 );
 
--- Insertar categorías de ejemplo
+-- Insertar categorías
 INSERT INTO category (name) VALUES
 ('Community Development'),
 ('Environmental Sustainability'),

@@ -1,23 +1,32 @@
 <%- include('partials/header') %>
 
-  <main>
-    <h1>
-      <%= title %>
-    </h1>
+<main>
+  <h1><%= title %></h1>
 
-    <p>Here are a few of our partner organizations:</p>
+  <p>Here are a few of our partner organizations:</p>
 
-    <ul>
-      <% organizations.forEach(organization=> { %>
-        <li>
-          <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
-          <strong>
+  <ul>
+    <% organizations.forEach(organization => { %>
+      <li>
+        <img
+          src="/images/<%= organization.logo_filename %>"
+          alt="<%= organization.name %> logo"
+        >
+
+        <strong>
+          <a href="/organizations/<%= organization.organization_id %>">
             <%= organization.name %>
-          </strong>: <%= organization.contact_email %>
-          <p><%= organization.description %></p>
-        </li>
-        <% }); %>
-    </ul>
-  </main>
+          </a>
+        </strong>
 
-  <%- include('partials/footer') %>
+        : <%= organization.contact_email %>
+
+        <p>
+          <%= organization.description %>
+        </p>
+      </li>
+    <% }); %>
+  </ul>
+</main>
+
+<%- include('partials/footer') %>

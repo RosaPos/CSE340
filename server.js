@@ -2,9 +2,7 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
-import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllProjects } from './src/models/projects.js';
-import { getAllCategories } from './src/models/categories.js';
+import routes from './src/controllers/routes.js';
 
 const NODE_ENV =
   process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -26,34 +24,47 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
 
-// Tell Express where to find your templates
+// Tell Express where to find the templates
 app.set('views', path.join(__dirname, 'src/views'));
+
+// Middleware to log all incoming requests
+app.use((req, res, next) => {
+  if (NODE_ENV === 'development') {
+    console.log(`${req.method} ${req.url}`);
+  }
+
+  next();
+});
+
+// Make NODE_ENV available to all EJS views
+app.use((req, res, next) => {
+  res.locals.NODE_ENV = NODE_ENV;
+  next();
+});
 
 /**
  * Routes
  */
 
-app.get('/', async (req, res) => {
-  const title = 'Home';
-  res.render('home', { title });
+app.use('/', routes);
+
+// Handle requests that do not match any route
+app.use((req, res) => {
+  const title = 'Page Not Found';
+
+  res.status(404).render('404', { title });
 });
 
-app.get('/organizations', async (req, res) => {
-  const organizations = await getAllOrganizations();
-  const title = 'Our Partner Organizations';
-  res.render('organizations', { title, organizations });
-});
+// Global error-handling middleware
+app.use((err, req, res, next) => {
+  console.error(err);
 
-app.get('/projects', async (req, res) => {
-  const projects = await getAllProjects();
-  const title = 'Service Projects';
-  res.render('projects', { title, projects });
-});
+  const title = 'Internal Server Error';
 
-app.get('/categories', async (req, res) => {
-  const categories = await getAllCategories();
-  const title = 'Service Project Categories';
-  res.render('categories', { title, categories });
+  res.status(500).render('500', {
+    title,
+    error: err
+  });
 });
 
 app.listen(PORT, async () => {
