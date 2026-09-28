@@ -27,8 +27,8 @@ router.get('/projects/:id', showProjectDetailsPage);
 router.get('/categories', showCategoriesPage);
 
 // Temporary route to test the 500 error handler
-router.get('/error', (req, res) => {
-  throw new Error('Intentional test error');
-});
+// router.get('/error', (req, res) => {
+//  throw new Error('Intentional test error');
+//});
 
 export default router;
