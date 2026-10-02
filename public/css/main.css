@@ -160,6 +160,40 @@ main li img {
   border-radius: 20px;
 }
 
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.category-tag {
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: var(--small-shadow);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.category-tag:hover {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+}
+
+.category-tag:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 3px;
+}
+
 footer {
   margin-top: auto;
   padding: 1.5rem 20px;

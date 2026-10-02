@@ -10,11 +10,15 @@
       <li>
         <strong><%= project.date.toDateString() %></strong>:
 
-        <a href="/projects/<%= project.project_id %>">
+        <a href="/project/<%= project.project_id %>">
           <%= project.title %>
         </a>
 
-        (<%= project.organization_name %>)
+        (
+        <a href="/organization/<%= project.organization_id %>">
+          <%= project.organization_name %>
+        </a>
+        )
       </li>
     <% }); %>
   </ul>

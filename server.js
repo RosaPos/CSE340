@@ -2,7 +2,7 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
-import routes from './src/controllers/routes.js';
+import router from './src/routes.js';
 
 const NODE_ENV =
   process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -46,25 +46,31 @@ app.use((req, res, next) => {
  * Routes
  */
 
-app.use('/', routes);
+app.use(router);
 
-// Handle requests that do not match any route
-app.use((req, res) => {
-  const title = 'Page Not Found';
+// Catch-all route for 404 errors
+app.use((req, res, next) => {
+  const err = new Error('Page Not Found');
+  err.status = 404;
 
-  res.status(404).render('404', { title });
+  next(err);
 });
 
-// Global error-handling middleware
+// Global error handler
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.error('Error occurred:', err.message);
+  console.error('Stack trace:', err.stack);
 
-  const title = 'Internal Server Error';
+  const status = err.status || 500;
+  const template = status === 404 ? '404' : '500';
 
-  res.status(500).render('500', {
-    title,
-    error: err
-  });
+  const context = {
+    title: status === 404 ? 'Page Not Found' : 'Server Error',
+    error: err.message,
+    stack: err.stack
+  };
+
+  res.status(status).render(`errors/${template}`, context);
 });
 
 app.listen(PORT, async () => {

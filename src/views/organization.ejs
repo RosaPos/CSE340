@@ -1,16 +1,26 @@
 <%- include('partials/header') %>
 
 <main>
-  <h1><%= organization.name %></h1>
+  <h1><%= title %></h1>
 
-  <p><%= organization.description %></p>
+  <h2><%= organizationDetails.name %></h2>
+
+  <img
+    src="/images/<%= organizationDetails.logo_filename %>"
+    alt="<%= organizationDetails.name %> logo"
+  >
+
+  <p>
+    Description:
+    <%= organizationDetails.description %>
+  </p>
 
   <p>
     <strong>Email:</strong>
-    <%= organization.contact_email %>
+    <%= organizationDetails.contact_email %>
   </p>
 
-  <h2>Service Projects</h2>
+  <h3>Service Projects</h3>
 
   <% if (projects.length === 0) { %>
     <p>This organization does not currently have any service projects.</p>
@@ -18,9 +28,11 @@
     <ul>
       <% projects.forEach(project => { %>
         <li>
-          <strong><%= project.title %></strong>
-          — <%= project.location %>
-          — <%= project.date.toDateString() %>
+          <a href="/project/<%= project.project_id %>">
+            <%= project.title %>
+          </a>
+          - <%= project.location %>
+          - <%= project.date.toDateString() %>
         </li>
       <% }); %>
     </ul>

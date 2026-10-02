@@ -1,6 +1,6 @@
 import {
   getAllOrganizations,
-  getOrganizationById
+  getOrganizationDetails
 } from '../models/organizations.js';
 
 import { getProjectsByOrganizationId } from '../models/projects.js';
@@ -9,27 +9,33 @@ const showOrganizationsPage = async (req, res) => {
   const organizations = await getAllOrganizations();
   const title = 'Our Partner Organizations';
 
-  res.render('organizations', { title, organizations });
+  res.render('organizations', {
+    title,
+    organizations
+  });
 };
 
 const showOrganizationDetailsPage = async (req, res, next) => {
   const organizationId = req.params.id;
 
-  const organization = await getOrganizationById(organizationId);
+  const organizationDetails =
+    await getOrganizationDetails(organizationId);
 
-  if (!organization) {
-    return res.status(404).render('404', {
-      title: 'Organization Not Found'
-    });
+  if (!organizationDetails) {
+    const err = new Error('Organization Not Found');
+    err.status = 404;
+
+    return next(err);
   }
 
-  const projects = await getProjectsByOrganizationId(organizationId);
+  const projects =
+    await getProjectsByOrganizationId(organizationId);
 
-  const title = organization.name;
+  const title = 'Organization Details';
 
   res.render('organization', {
     title,
-    organization,
+    organizationDetails,
     projects
   });
 };
