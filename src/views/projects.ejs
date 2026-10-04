@@ -1,27 +1,38 @@
 <%- include('partials/header') %>
 
-<main>
-  <h1><%= title %></h1>
+  <main>
+    <h1>
+      <%= title %>
+    </h1>
 
-  <p>Here are our current service projects:</p>
+    <p>Here are our current service projects:</p>
 
-  <ul>
-    <% projects.forEach(project => { %>
-      <li>
-        <strong><%= project.date.toDateString() %></strong>:
+    <ul>
+      <% projects.forEach(project=> { %>
+        <li>
+          <strong>
+            <%= project.date.toDateString() %>
+          </strong>:
 
-        <a href="/project/<%= project.project_id %>">
-          <%= project.title %>
-        </a>
+          <a href="/project/<%= project.project_id %>">
+            <%= project.title %>
+          </a>
 
-        (
-        <a href="/organization/<%= project.organization_id %>">
-          <%= project.organization_name %>
-        </a>
-        )
-      </li>
-    <% }); %>
-  </ul>
-</main>
+          (
+          <a href="/organization/<%= project.organization_id %>">
+            <%= project.organization_name %>
+          </a>
+          )
+        </li>
+        <% }); %>
+    </ul>
 
-<%- include('partials/footer') %>
+    <p>
+      <a href="/new-project">
+        Add a New Service Project
+      </a>
+    </p>
+
+  </main>
+
+  <%- include('partials/footer') %>

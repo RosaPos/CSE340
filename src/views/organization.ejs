@@ -1,42 +1,49 @@
 <%- include('partials/header') %>
 
-<main>
-  <h1><%= title %></h1>
+  <main>
+    <h1>
+      <%= title %>
+    </h1>
 
-  <h2><%= organizationDetails.name %></h2>
+    <h2>
+      <%= organizationDetails.name %>
+    </h2>
 
-  <img
-    src="/images/<%= organizationDetails.logo_filename %>"
-    alt="<%= organizationDetails.name %> logo"
-  >
+    <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
 
-  <p>
-    Description:
-    <%= organizationDetails.description %>
-  </p>
+    <p>
+      Description:
+      <%= organizationDetails.description %>
+    </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= organizationDetails.contact_email %>
-  </p>
+    <p>
+      <strong>Email:</strong>
+      <%= organizationDetails.contact_email %>
+    </p>
 
-  <h3>Service Projects</h3>
+    <p>
+      <a href="/edit-organization/<%= organizationDetails.organization_id %>">
+        Edit Organization
+      </a>
+    </p>
 
-  <% if (projects.length === 0) { %>
-    <p>This organization does not currently have any service projects.</p>
-  <% } else { %>
-    <ul>
-      <% projects.forEach(project => { %>
-        <li>
-          <a href="/project/<%= project.project_id %>">
-            <%= project.title %>
-          </a>
-          - <%= project.location %>
-          - <%= project.date.toDateString() %>
-        </li>
-      <% }); %>
-    </ul>
-  <% } %>
-</main>
+    <h3>Service Projects</h3>
 
-<%- include('partials/footer') %>
+    <% if (projects.length===0) { %>
+      <p>This organization does not currently have any service projects.</p>
+      <% } else { %>
+        <ul>
+          <% projects.forEach(project=> { %>
+            <li>
+              <a href="/project/<%= project.project_id %>">
+                <%= project.title %>
+              </a>
+              - <%= project.location %>
+                - <%= project.date.toDateString() %>
+            </li>
+            <% }); %>
+        </ul>
+        <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
