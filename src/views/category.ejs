@@ -1,23 +1,32 @@
 <%- include('partials/header') %>
 
-<main>
-  <h1><%= category.name %></h1>
+  <main>
+    <h1>
+      <%= category.name %>
+    </h1>
 
-  <h2>Service Projects</h2>
+    <h2>Service Projects</h2>
 
-  <% if (projects.length === 0) { %>
-    <p>There are no service projects for this category.</p>
-  <% } else { %>
-    <ul>
-      <% projects.forEach(project => { %>
-        <li>
-          <a href="/project/<%= project.project_id %>">
-            <%= project.title %>
-          </a>
-        </li>
-      <% }); %>
-    </ul>
-  <% } %>
-</main>
+    <% if (projects.length===0) { %>
+      <p>There are no service projects for this category.</p>
+      <% } else { %>
+        <ul>
+          <% projects.forEach(project=> { %>
+            <li>
+              <a href="/project/<%= project.project_id %>">
+                <%= project.title %>
+              </a>
+            </li>
+            <% }); %>
+        </ul>
+        <% } %>
 
-<%- include('partials/footer') %>
+          <p>
+            <a href="/edit-category/<%= category.category_id %>">
+              Edit Category
+            </a>
+          </p>
+
+  </main>
+
+  <%- include('partials/footer') %>
