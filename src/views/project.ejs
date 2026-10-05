@@ -26,6 +26,12 @@
       <%= project.date.toDateString() %>
     </p>
 
+    <p>
+      <a href="/edit-project/<%= project.project_id %>">
+        Edit Project
+      </a>
+    </p>
+
     <h2>Categories</h2>
 
     <% if (categories.length===0) { %>
