@@ -58,9 +58,19 @@ app.use((req, res, next) => {
   next();
 });
 
-// Make NODE_ENV available to all EJS views
+// Make login status, user role, and environment
+// available to EJS views
 app.use((req, res, next) => {
+  res.locals.isLoggedIn = false;
+
+  if (req.session && req.session.user) {
+    res.locals.isLoggedIn = true;
+  }
+
+  res.locals.user = req.session?.user || null;
+
   res.locals.NODE_ENV = NODE_ENV;
+
   next();
 });
 

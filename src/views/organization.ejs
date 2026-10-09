@@ -21,29 +21,31 @@
       <%= organizationDetails.contact_email %>
     </p>
 
-    <p>
-      <a href="/edit-organization/<%= organizationDetails.organization_id %>">
-        Edit Organization
-      </a>
-    </p>
+    <% if (user && user.role_name==='admin' ) { %>
+      <p>
+        <a href="/edit-organization/<%= organizationDetails.organization_id %>">
+          Edit Organization
+        </a>
+      </p>
+      <% } %>
 
-    <h3>Service Projects</h3>
+        <h3>Service Projects</h3>
 
-    <% if (projects.length===0) { %>
-      <p>This organization does not currently have any service projects.</p>
-      <% } else { %>
-        <ul>
-          <% projects.forEach(project=> { %>
-            <li>
-              <a href="/project/<%= project.project_id %>">
-                <%= project.title %>
-              </a>
-              - <%= project.location %>
-                - <%= project.date.toDateString() %>
-            </li>
-            <% }); %>
-        </ul>
-        <% } %>
+        <% if (projects.length===0) { %>
+          <p>This organization does not currently have any service projects.</p>
+          <% } else { %>
+            <ul>
+              <% projects.forEach(project=> { %>
+                <li>
+                  <a href="/project/<%= project.project_id %>">
+                    <%= project.title %>
+                  </a>
+                  - <%= project.location %>
+                    - <%= project.date.toDateString() %>
+                </li>
+                <% }); %>
+            </ul>
+            <% } %>
   </main>
 
   <%- include('partials/footer') %>
