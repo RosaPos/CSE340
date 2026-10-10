@@ -277,3 +277,54 @@ footer p {
   background-color: #d1ecf1;
   border-color: #bee5eb;
 }
+
+/* =========================================
+   W05 Assignment - Registered Users Table
+   ========================================= */
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  font-size: 15px;
+}
+
+.users-table th,
+.users-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e7e0ef;
+  overflow-wrap: anywhere;
+}
+
+.users-table thead {
+  background-color: #f1eafa;
+}
+
+.users-table th {
+  color: #40246c;
+  font-weight: 700;
+}
+
+.users-table td {
+  color: #444054;
+}
+
+.users-table tbody tr:nth-child(even) {
+  background-color: #faf8fd;
+}
+
+.users-table tbody tr:hover {
+  background-color: #f4effb;
+}
+
+@media (max-width: 600px) {
+  .users-table {
+    font-size: 13px;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 10px 8px;
+  }
+}

@@ -111,7 +111,27 @@ const authenticateUser = async (
   return safeUser;
 };
 
+// Get all registered users and their roles
+const getAllUsers = async () => {
+  const query = `
+    SELECT
+      u.user_id,
+      u.name,
+      u.email,
+      r.role_name
+    FROM users AS u
+    JOIN roles AS r
+      ON u.role_id = r.role_id
+    ORDER BY u.name ASC, u.user_id ASC
+  `;
+
+  const result = await db.query(query);
+
+  return result.rows;
+};
+
 export {
   createUser,
-  authenticateUser
+  authenticateUser,
+  getAllUsers
 };

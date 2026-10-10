@@ -1,17 +1,28 @@
 <%- include('partials/header') %>
 
 <main>
-  <h1><%= title %></h1>
+    <h1><%= title %></h1>
 
-  <h2>Dashboard</h2>
+    <h2>Dashboard</h2>
 
-  <p>
-    Name: <%= name %>
-  </p>
+    <p>
+        Name: <%= name %>
+    </p>
 
-  <p>
-    Username: <%= email %>
-  </p>
+    <p>
+        Username: <%= email %>
+    </p>
+
+    <% if (user && user.role_name === 'admin') { %>
+        <section aria-label="Administration">
+            <h2>Administration</h2>
+
+            <p>
+                <a href="/users">View Registered Users</a>
+            </p>
+        </section>
+    <% } %>
+
 </main>
 
 <%- include('partials/footer') %>

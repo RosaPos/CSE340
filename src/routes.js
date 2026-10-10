@@ -48,7 +48,8 @@ import {
   processLogout,
   requireLogin,
   requireRole,
-  showDashboard
+  showDashboard,
+  showUsersPage
 } from './controllers/users.js';
 
 const router = Router();
@@ -88,6 +89,13 @@ router.get(
   '/dashboard',
   requireLogin,
   showDashboard
+);
+
+// Admin-only registered users page
+router.get(
+  '/users',
+  requireRole('admin', '/dashboard'),
+  showUsersPage
 );
 
 // Public organization pages

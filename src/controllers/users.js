@@ -2,7 +2,8 @@ import bcrypt from 'bcrypt';
 
 import {
   createUser,
-  authenticateUser
+  authenticateUser,
+  getAllUsers
 } from '../models/users.js';
 
 // REGISTRATION
@@ -132,7 +133,7 @@ const requireLogin = (req, res, next) => {
 };
 
 // Middleware factory to require a specific user role
-const requireRole = (role) => {
+const requireRole = (role, deniedRedirect = '/') => {
   return (req, res, next) => {
 
     // Check if the user is logged in
@@ -152,7 +153,7 @@ const requireRole = (role) => {
         'You do not have permission to access this page.'
       );
 
-      return res.redirect('/');
+      return res.redirect(deniedRedirect);
     }
 
     // Allow access
@@ -171,6 +172,25 @@ const showDashboard = (req, res) => {
   });
 };
 
+// Display all registered users
+const showUsersPage = async (req, res, next) => {
+  try {
+    const users = await getAllUsers();
+
+    res.render('users', {
+      title: 'Registered Users',
+      users
+    });
+  } catch (error) {
+    console.error(
+      'Error retrieving users:',
+      error
+    );
+
+    next(error);
+  }
+};
+
 export {
   showUserRegistrationForm,
   processUserRegistrationForm,
@@ -179,5 +199,6 @@ export {
   processLogout,
   requireLogin,
   requireRole,
-  showDashboard
+  showDashboard,
+  showUsersPage
 };
