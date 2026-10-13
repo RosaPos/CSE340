@@ -328,3 +328,80 @@ footer p {
     padding: 10px 8px;
   }
 }
+
+/* =========================================
+   W06 - Volunteer Project Features
+   ========================================= */
+
+/* Volunteering section on project details */
+.volunteer-section {
+  margin: 28px 0;
+  padding: 22px;
+  background-color: #f8f5fc;
+  border: 1px solid #e9e0f5;
+  border-radius: 14px;
+}
+
+.volunteer-section h2 {
+  margin-top: 0;
+}
+
+/* My Volunteer Projects on Dashboard */
+.volunteer-dashboard {
+  margin-top: 32px;
+}
+
+.volunteer-project-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 280px), 1fr)
+  );
+  gap: 18px;
+  padding: 0;
+  margin-top: 20px;
+  list-style: none;
+}
+
+.volunteer-project-item {
+  padding: 22px;
+  background-color: #faf8fd;
+  border: 1px solid #e8dff4;
+  border-left: 4px solid #7046ac;
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(48, 27, 78, 0.06);
+}
+
+.volunteer-project-item h3 {
+  margin-top: 0;
+}
+
+.volunteer-project-item p {
+  line-height: 1.6;
+}
+
+/* Volunteer action buttons */
+.volunteer-section button,
+.volunteer-dashboard button {
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #65419b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.volunteer-section button:hover,
+.volunteer-dashboard button:hover {
+  background-color: #4b2b78;
+}
+
+.volunteer-section button:focus-visible,
+.volunteer-dashboard button:focus-visible {
+  outline: 3px solid #ae8de2;
+  outline-offset: 3px;
+}

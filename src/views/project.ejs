@@ -26,35 +26,59 @@
       <%= project.date.toDateString() %>
     </p>
 
-    <% if (user && user.role_name==='admin' ) { %>
-      <p>
-        <a href="/edit-project/<%= project.project_id %>">
-          Edit Project
-        </a>
-      </p>
+    <!-- W06 - Volunteer functionality -->
+    <% if (user) { %>
+      <section class="volunteer-section">
+        <h2>Volunteering</h2>
+
+        <% if (isVolunteering) { %>
+          <p>You are volunteering for this project.</p>
+
+          <form action="/project/<%= project.project_id %>/unvolunteer" method="POST">
+            <button type="submit">
+              Remove Volunteering
+            </button>
+          </form>
+
+          <% } else { %>
+            <form action="/project/<%= project.project_id %>/volunteer" method="POST">
+              <button type="submit">
+                Volunteer for This Project
+              </button>
+            </form>
+            <% } %>
+      </section>
       <% } %>
 
-        <h2>Categories</h2>
+        <% if (user && user.role_name==='admin' ) { %>
+          <p>
+            <a href="/edit-project/<%= project.project_id %>">
+              Edit Project
+            </a>
+          </p>
+          <% } %>
 
-        <% if (categories.length===0) { %>
-          <p>No categories are assigned to this project.</p>
-          <% } else { %>
-            <div class="category-tags">
-              <% categories.forEach(category=> { %>
-                <a class="category-tag" href="/category/<%= category.category_id %>">
-                  <%= category.name %>
-                </a>
-                <% }); %>
-            </div>
-            <% } %>
+            <h2>Categories</h2>
 
-              <% if (user && user.role_name==='admin' ) { %>
-                <p>
-                  <a href="/assign-categories/<%= project.project_id %>">
-                    Edit Categories
-                  </a>
-                </p>
+            <% if (categories.length===0) { %>
+              <p>No categories are assigned to this project.</p>
+              <% } else { %>
+                <div class="category-tags">
+                  <% categories.forEach(category=> { %>
+                    <a class="category-tag" href="/category/<%= category.category_id %>">
+                      <%= category.name %>
+                    </a>
+                    <% }); %>
+                </div>
                 <% } %>
+
+                  <% if (user && user.role_name==='admin' ) { %>
+                    <p>
+                      <a href="/assign-categories/<%= project.project_id %>">
+                        Edit Categories
+                      </a>
+                    </p>
+                    <% } %>
 
   </main>
 

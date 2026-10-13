@@ -52,6 +52,11 @@ import {
   showUsersPage
 } from './controllers/users.js';
 
+import {
+  addProjectVolunteer,
+  removeProjectVolunteer
+} from './controllers/volunteers.js';
+
 const router = Router();
 
 // Home
@@ -172,6 +177,20 @@ router.post(
   requireRole('admin'),
   projectValidation,
   processNewProjectForm
+);
+
+// W06 - Add a volunteer to a service project
+router.post(
+  '/project/:projectId/volunteer',
+  requireLogin,
+  addProjectVolunteer
+);
+
+// W06 - Remove a volunteer from a service project
+router.post(
+  '/project/:projectId/unvolunteer',
+  requireLogin,
+  removeProjectVolunteer
 );
 
 // Public category pages

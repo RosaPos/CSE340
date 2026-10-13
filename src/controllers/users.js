@@ -6,6 +6,10 @@ import {
   getAllUsers
 } from '../models/users.js';
 
+import {
+  getVolunteerProjects
+} from '../models/volunteers.js';
+
 // REGISTRATION
 
 const showUserRegistrationForm = (req, res) => {
@@ -161,15 +165,25 @@ const requireRole = (role, deniedRedirect = '/') => {
   };
 };
 
-// Show dashboard for authenticated users
-const showDashboard = (req, res) => {
-  const user = req.session.user;
+// Display the dashboard and the user's volunteer projects
+const showDashboard = async (req, res, next) => {
+  try {
+    const user = req.session.user;
 
-  res.render('dashboard', {
-    title: 'Dashboard',
-    name: user.name,
-    email: user.email
-  });
+    const volunteerProjects = await getVolunteerProjects(
+      user.user_id
+    );
+
+    res.render('dashboard', {
+      title: 'Dashboard',
+      name: user.name,
+      email: user.email,
+      volunteerProjects
+    });
+  } catch (error) {
+    console.error('Error loading dashboard:', error);
+    next(error);
+  }
 };
 
 // Display all registered users
